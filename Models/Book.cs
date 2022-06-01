@@ -6,10 +6,10 @@ namespace BookStoreP4.Models {
         public string Title { get; }
         public string Description { get; }
         public List<Author> Authors { get; }
-        public decimal Price { get; }
-        public decimal VAT { get; }
+        public float Price { get; }
+        public float VAT { get; }
 
-        public Book(string isbn, string title, string description, List<Author> authors, decimal price, decimal vat) {
+        public Book(string isbn, string title, string description, List<Author> authors, float price, float vat) {
             ISBN = isbn;
             Title = title;
             Description = description;

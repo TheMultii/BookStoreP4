@@ -4,10 +4,10 @@
         public Order OrderItemOrder { get; }
         public Book OrderItemBook { get; }
         public int Quantity { get; }
-        public decimal BookPrice { get; }
-        public decimal BookVAT { get; }
-        public decimal BookNettoValue { get; }
-        public decimal BookBruttoValue { get; }
+        public float BookPrice { get; }
+        public float BookVAT { get; }
+        public float BookNettoValue { get; }
+        public float BookBruttoValue { get; }
 
         public OrderItem(int orderItemID, Order orderItemOrder, Book book, int quantity) {
             OrderItemID = orderItemID;

@@ -17,6 +17,21 @@
             CustomerCity = customerCity;
             CustomerPESEL = customerPESEL;
         }
+        public Customer(int customerID, string customerName, string customerSurname, string customerEmail, string customerStreet, string customerCity) {
+            CustomerID = customerID;
+            CustomerName = customerName;
+            CustomerSurname = customerSurname;
+            CustomerEmail = customerEmail;
+            CustomerStreet = customerStreet;
+            CustomerCity = customerCity;
+        }
+        public Customer(string customerName, string customerSurname, string customerEmail, string customerStreet, string customerCity) {
+            CustomerName = customerName;
+            CustomerSurname = customerSurname;
+            CustomerEmail = customerEmail;
+            CustomerStreet = customerStreet;
+            CustomerCity = customerCity;
+        }
 
         public override string ToString() {
             return $"{CustomerName} {CustomerSurname}";

@@ -17,6 +17,23 @@
             EmployeeCity = employeeCity;
             EmployeePESEL = employeePESEL;
         }
+        public Employee(int employeeID, string employeeName, string employeeSurname, string employeeEmail, string employeeStreet, string employeeCity) {
+            EmployeeID = employeeID;
+            EmployeeName = employeeName;
+            EmployeeSurname = employeeSurname;
+            EmployeeEmail = employeeEmail;
+            EmployeeStreet = employeeStreet;
+            EmployeeCity = employeeCity;
+            EmployeePESEL = null;
+        }
+        public Employee(string employeeName, string employeeSurname, string employeeEmail, string employeeStreet, string employeeCity) {
+            EmployeeName = employeeName;
+            EmployeeSurname = employeeSurname;
+            EmployeeEmail = employeeEmail;
+            EmployeeStreet = employeeStreet;
+            EmployeeCity = employeeCity;
+            EmployeePESEL = null;
+        }
 
         public override string ToString() {
             return $"{EmployeeName} {EmployeeSurname}";

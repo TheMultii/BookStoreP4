@@ -3,10 +3,11 @@ using BookStoreP4.Services;
 using BookStoreP4.ViewModels;
 using System;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace BookStoreP4.Commands {
-    public class AddOrderCommand : CommandBase {
+    public class AddOrderCommand : AsyncCommandBase {
         private readonly AddOrderViewModel _addOrderViewModel;
         private readonly OrderList _orderList;
         private readonly NavigationService _orderViewNavigationService;
@@ -28,22 +29,27 @@ namespace BookStoreP4.Commands {
                 ) && base.CanExecute(parameter);
         }
 
-        public override void Execute(object? parameter) {
+        public override async Task ExecuteAsync(object? parameter) {
             
             try {
-                Employee e = new(_addOrderViewModel.OrderEmployeeID, $"{_addOrderViewModel.OrderEmployeeID}-{Guid.NewGuid().ToString()[..5]}", Guid.NewGuid().ToString()[..5], "mail@mail.pl", "Ulica 1", "Bielsko-Biała");
+                
+                Employee e = new(_addOrderViewModel.OrderEmployeeID.ToString(), "Kowalski", "mail@mail.pl", "Ulica 1", "Bielsko-Biała");
 
-                Customer p = new(_addOrderViewModel.OrderCustomerID, $"{_addOrderViewModel.OrderCustomerID}-{Guid.NewGuid().ToString()[..5]}", Guid.NewGuid().ToString()[..5], "mail@mail.pl", "Ulica 1", "Bielsko-Biała");
+                Customer p = new(_addOrderViewModel.OrderCustomerID.ToString(), "Kowalski", "mail@mail.pl", "Ulica 1", "Bielsko-Biała");
+                
+                Order newOrder = new(
+                    1,
+                    e,
+                    p,
+                    _addOrderViewModel.OrderDateTime
+                );
 
-                Order newOrder = new(1, e, p, _addOrderViewModel.OrderDateTime);
-
-                _orderList.AddOrder(newOrder);
+                await _orderList.AddOrder(newOrder);
 
                 _orderViewNavigationService.Navigate();
             } catch (Exception ex) {
                 MessageBox.Show("Wystąpił błąd - nie udało się dodać zamówienia", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
         }
         private void OnViewModelPropertyChanged(object sender, PropertyChangedEventArgs e) {
             if (e.PropertyName == nameof(_addOrderViewModel.OrderEmployeeID) || e.PropertyName == nameof(_addOrderViewModel.OrderCustomerID) || e.PropertyName == nameof(_addOrderViewModel.OrderDateTime)) {

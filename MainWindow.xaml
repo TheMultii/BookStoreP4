@@ -4,7 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BookStoreP4"
-        xmlns:views="clr-namespace:BookStoreP4.Views" xmlns:viewmodels="clr-namespace:BookStoreP4.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
+        xmlns:views="clr-namespace:BookStoreP4.Views"
+        xmlns:viewmodels="clr-namespace:BookStoreP4.ViewModels"
+        d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
         mc:Ignorable="d"
         Title="BookStore" Height="450" Width="800">
     <Grid>
@@ -14,6 +16,9 @@
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodels:AddOrderViewModel}">
                 <views:AddOrderView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:AddBookViewModel}">
+                <views:AddBookView />
             </DataTemplate>
         </Grid.Resources>
         

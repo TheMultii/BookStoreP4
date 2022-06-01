@@ -11,23 +11,29 @@ namespace BookStoreP4.ViewModels {
     public class OrderListingViewModel : ViewModelBase {
 
         private readonly ObservableCollection<OrderViewModel> _orders;
-        private readonly OrderList _orderList;
 
         public IEnumerable<OrderViewModel> Orders => _orders;
 
+        public ICommand LoadOrdersCommand { get; }
         public ICommand AddOrderCommand { get; }
+        public ICommand AddBookCommand { get; }
 
-        public OrderListingViewModel(OrderList orderList, NavigationService addOrderNavigationService) {
+        public OrderListingViewModel(OrderList orderList, NavigationService addOrderNavigationService, NavigationService addBookNavigationService) {
             _orders = new();
-            _orderList = orderList;
+            LoadOrdersCommand = new LoadOrdersCommand(this, orderList);
             AddOrderCommand = new NavigateCommand(addOrderNavigationService);
-
-            UpdateOrders();
+            AddBookCommand = new NavigateCommand(addBookNavigationService);
         }
 
-        private void UpdateOrders() {
+        public static OrderListingViewModel LoadViewModel(OrderList orderList, NavigationService addOrderNavigationService, NavigationService addBookNavigationService) {
+            OrderListingViewModel viewModel = new(orderList, addOrderNavigationService, addBookNavigationService);
+            viewModel.LoadOrdersCommand.Execute(null);
+            return viewModel;
+        }
+
+        public void UpdateOrders(IEnumerable<Order> orders) {
             _orders.Clear();
-            foreach (Order _order in _orderList.GetOrders()) {
+            foreach (Order _order in orders) {
                 OrderViewModel orderViewModel = new(_order);
                 _orders.Add(orderViewModel);
             }

@@ -16,10 +16,12 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
 
             <TextBlock Style="{StaticResource Header}" Text="Lista zamówień" Grid.Column="0" />
             <Button Command="{Binding AddOrderCommand}" Margin="10 0 0 0" Content="Dodaj zamówienie" Grid.Column="1" />
+            <Button Command="{Binding AddBookCommand}" Margin="10 0 0 0" Content="Dodaj pozycję zamówienia" Grid.Column="2" />
         </Grid>
 
         <ListView Grid.Row="1" ItemsSource="{Binding Orders}">
