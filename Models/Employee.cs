@@ -1,0 +1,25 @@
+﻿namespace BookStoreP4.Models {
+    public class Employee {
+        public int EmployeeID { get; }
+        public string EmployeeName { get; }
+        public string EmployeeSurname { get; }
+        public string EmployeeEmail { get; }
+        public string EmployeeStreet { get; }
+        public string EmployeeCity { get; }
+        public string? EmployeePESEL { get; }
+
+        public Employee(int employeeID, string employeeName, string employeeSurname, string employeeEmail, string employeeStreet, string employeeCity, string? employeePESEL = null) {
+            EmployeeID = employeeID;
+            EmployeeName = employeeName;
+            EmployeeSurname = employeeSurname;
+            EmployeeEmail = employeeEmail;
+            EmployeeStreet = employeeStreet;
+            EmployeeCity = employeeCity;
+            EmployeePESEL = employeePESEL;
+        }
+
+        public override string ToString() {
+            return $"{EmployeeName} {EmployeeSurname}";
+        }
+    }
+}
