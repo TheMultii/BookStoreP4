@@ -5,8 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BookStoreP4.DTOs {
     public class OrderDTO {
-        
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         [Key]
         public int OrderID { get; set; }
         public virtual EmployeeDTO? OrderEmployeeID { get; set; }

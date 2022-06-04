@@ -14,14 +14,6 @@ namespace BookStoreP4.Models {
             _orderCreator = orderCreator;
         }
 
-        //public async Task<IEnumerable<Order>> GetOrdersForEmployee(string name, string surname) {
-        //    return await _orderProvider.Where(o => o.OrderEmployee.EmployeeName?.ToLower() == name?.ToLower() && o.OrderEmployee.EmployeeSurname?.ToLower() == surname?.ToLower());
-        //}
-
-        //public async Task<IEnumerable<Order>> GetOrdersForCustomer(string name, string surname) {
-        //    return await _orderProvider.Where(o => o.OrderCustomer.CustomerName?.ToLower() == name?.ToLower() && o.OrderCustomer.CustomerSurname?.ToLower() == surname?.ToLower());
-        //}
-
         public async Task<IEnumerable<Order>> GetOrders() => await _orderProvider.GetAllOrders();
 
         public async Task AddOrder(Order order) {

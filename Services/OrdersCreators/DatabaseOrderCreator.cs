@@ -1,7 +1,9 @@
 ﻿using BookStoreP4.DBContext;
 using BookStoreP4.DTOs;
 using BookStoreP4.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace BookStoreP4.Services.OrdersCreators {
@@ -13,12 +15,54 @@ namespace BookStoreP4.Services.OrdersCreators {
         }
 
         public async Task CreateOrder(Order order) {
-            using (BookStoreDBContext context = _bookStoreDBContextFactory.CreateDbContext()) {
-                OrderDTO orderDTO = ToOrderDTO(order);
+            using BookStoreDBContext context = _bookStoreDBContextFactory.CreateDbContext();
+            using var transaction = context.Database.BeginTransaction();
+            OrderDTO orderDTO = ToOrderDTO(order);
+            EmployeeDTO? employeeDTO = orderDTO.OrderEmployeeID;
+            CustomerDTO? customerDTO = orderDTO.OrderCustomerID;
+            orderDTO.OrderEmployeeID = null;
+            orderDTO.OrderCustomerID = null;
 
-                context.Orders.Add(orderDTO);
-                await context.SaveChangesAsync();
+            context.Orders.Add(orderDTO);
+            await context.SaveChangesAsync();
+            context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.Customers OFF;");
+            
+            var result = context.Orders.AsNoTracking().SingleOrDefault(b => b.OrderDate == orderDTO.OrderDate);
+
+            if (employeeDTO != null) {
+                var employeeResult = context.Employees.AsNoTracking().SingleOrDefault(b => b.EmployeeID == employeeDTO.EmployeeID);
+                if (result != null) {
+                    context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.Employees ON;");
+                    if (employeeResult == null) {
+                        context.Employees.Add(employeeDTO);
+                        orderDTO.OrderEmployeeID = employeeDTO;
+                    } else {
+                        orderDTO.OrderEmployeeID = employeeResult;
+                    }
+                    context.Orders.Update(orderDTO);
+                    await context.SaveChangesAsync();
+                    context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.Employees OFF;");
+                }
             }
+
+            if (customerDTO != null) {
+                var customerResult = context.Customers.SingleOrDefault(b => b.CustomerID == customerDTO.CustomerID);
+
+                if(result != null) {
+                    context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.Customers ON;");
+                    if (customerResult == null) {
+                        orderDTO.OrderCustomerID = customerDTO;
+                        context.Customers.Add(customerDTO);
+                    } else {
+                        orderDTO.OrderCustomerID = customerResult;
+                    }
+                    context.Orders.Update(orderDTO);
+                    await context.SaveChangesAsync();
+                    context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.Customers OFF;");
+                }
+            }
+
+            transaction.Commit();
         }
 
         private OrderDTO ToOrderDTO(Order order) {

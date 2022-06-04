@@ -7,8 +7,8 @@ namespace BookStoreP4.DTOs {
         public BookDTO() {
             Authors = new HashSet<AuthorDTO>();
         }
-
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         [Key]
         public string ISBN { get; set; }
         [Required]
