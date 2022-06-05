@@ -2,6 +2,7 @@
 using Bogus.Extensions.Poland;
 using BookStoreP4.Models;
 using BookStoreP4.Services;
+using BookStoreP4.Stores;
 using BookStoreP4.ViewModels;
 using System;
 using System.ComponentModel;
@@ -26,12 +27,12 @@ namespace BookStoreP4.Commands {
     
     public class AddOrderCommand : AsyncCommandBase {
         private readonly AddOrderViewModel _addOrderViewModel;
-        private readonly OrderList _orderList;
+        private readonly OrderListStore _orderListStore;
         private readonly NavigationService _orderViewNavigationService;
 
-        public AddOrderCommand(AddOrderViewModel addOrderViewModel, OrderList orderList, NavigationService orderViewNavigationService) {
+        public AddOrderCommand(AddOrderViewModel addOrderViewModel, OrderListStore orderListStore, NavigationService orderViewNavigationService) {
             _addOrderViewModel = addOrderViewModel;
-            _orderList = orderList;
+            _orderListStore = orderListStore;
             _orderViewNavigationService = orderViewNavigationService;
 
             _addOrderViewModel.PropertyChanged += OnViewModelPropertyChanged;
@@ -71,7 +72,7 @@ namespace BookStoreP4.Commands {
                     _addOrderViewModel.OrderDateTime
                 );
 
-                await _orderList.AddOrder(newOrder);
+                await _orderListStore.AddOrder(newOrder);
 
                 _orderViewNavigationService.Navigate();
             } catch (Exception ex) {

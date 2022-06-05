@@ -3,85 +3,111 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:BookStoreP4.Views" xmlns:viewmodels="clr-namespace:BookStoreP4.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:OrderListingViewModel}"
+             xmlns:local="clr-namespace:BookStoreP4.Views" xmlns:viewmodels="clr-namespace:BookStoreP4.ViewModels" xmlns:converters="clr-namespace:BookStoreP4.Converters" xmlns:loadingspinnercontrol="clr-namespace:LoadingSpinnerControl;assembly=LoadingSpinnerControl" d:DataContext="{d:DesignInstance Type=viewmodels:OrderListingViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="600" MaxWidth="600" FontSize="14">
-    <Grid Margin="8">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="auto"/>
-        </Grid.RowDefinitions>
+    <UserControl.Resources>
+        <converters:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter" />
+    </UserControl.Resources>
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Margin="8">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Margin="0 0 0 30" >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-            </Grid.ColumnDefinitions>
+            <Grid Grid.Row="0" Margin="0 0 0 30" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
 
-            <TextBlock Style="{StaticResource Header}" Text="Lista zamówień" Grid.Column="0" />
-            <Button Command="{Binding AddOrderCommand}" Margin="10 0 0 0" Content="Dodaj zamówienie" Grid.Column="1" />
-            <Button Command="{Binding AddBookCommand}" Margin="10 0 0 0" Content="Dodaj pozycję zamówienia" Grid.Column="2" />
+                <TextBlock Style="{StaticResource Header}" Text="Lista zamówień" Grid.Column="0" />
+                <Button Command="{Binding AddOrderCommand}" Margin="10 0 0 0" Content="Dodaj zamówienie" Grid.Column="1" />
+                <Button Command="{Binding AddOrderItemCommand}" Margin="10 0 0 0" Content="Dodaj pozycję zamówienia" Grid.Column="2" />
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <loadingspinnercontrol:LoadingSpinner Thickness="2" Color="red" Diameter="25" IsLoading="{Binding IsLoading}" />
+
+                <ListView ItemsSource="{Binding Orders}" Visibility="{Binding IsLoading,Converter={StaticResource InverseBooleanToVisibilityConverter}}">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="ID Zamówienia">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock HorizontalAlignment="Center" Text="{Binding OrderID, UpdateSourceTrigger=PropertyChanged}" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Header="Klient">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock HorizontalAlignment="Center" Text="{Binding OrderCustomer, UpdateSourceTrigger=PropertyChanged}" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Header="Pracownik">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock HorizontalAlignment="Center" Text="{Binding OrderEmployee, UpdateSourceTrigger=PropertyChanged}" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Header="Ilość pozycji">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock HorizontalAlignment="Center" Text="{Binding OrderItemsCount, UpdateSourceTrigger=PropertyChanged}" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Header="Wartość">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock HorizontalAlignment="Center" Text="{Binding OrderItemsValue, UpdateSourceTrigger=PropertyChanged}" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Header="Data Zamówienia">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock HorizontalAlignment="Center" Text="{Binding OrderDate, UpdateSourceTrigger=PropertyChanged}" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
+
+            <Grid Grid.Row="2" FlowDirection="RightToLeft"  Margin="0 15 0 0" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+
+                <Button Command="{Binding ListBooksCommand}" Margin="0 0 10 0" Content="Wyświetl książki" Grid.Column="0" Grid.Row="0" />
+                <Button Command="{Binding ListAuthorsCommand}" Margin="0 0 10 0" Content="Wyświetl autorów" Grid.Column="1" Grid.Row="0" />
+                <Button Command="{Binding ListCustomersCommand}" Margin="0 10 10 0" Content="Wyświetl klientów" Grid.Column="0" Grid.Row="1" />
+                <Button Command="{Binding ListEmployeesCommand}" Margin="0 10 10 0" Content="Wyświetl pracowników" Grid.Column="1" Grid.Row="1" />
+            </Grid>
+
         </Grid>
-
-        <ListView Grid.Row="1" ItemsSource="{Binding Orders}">
-            <ListView.ItemContainerStyle>
-                <Style TargetType="ListViewItem">
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                </Style>
-            </ListView.ItemContainerStyle>
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="ID Zamówienia">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock HorizontalAlignment="Center" Text="{Binding OrderID, UpdateSourceTrigger=PropertyChanged}" />
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-
-                    <GridViewColumn Header="Klient">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock HorizontalAlignment="Center" Text="{Binding OrderCustomer, UpdateSourceTrigger=PropertyChanged}" />
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    
-                    <GridViewColumn Header="Pracownik">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock HorizontalAlignment="Center" Text="{Binding OrderEmployee, UpdateSourceTrigger=PropertyChanged}" />
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-
-                    <GridViewColumn Header="Ilość pozycji">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock HorizontalAlignment="Center" Text="{Binding OrderItemsCount, UpdateSourceTrigger=PropertyChanged}" />
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-
-                    <GridViewColumn Header="Wartość">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock HorizontalAlignment="Center" Text="{Binding OrderItemsValue, UpdateSourceTrigger=PropertyChanged}" />
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-
-                    <GridViewColumn Header="Data Zamówienia">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock HorizontalAlignment="Center" Text="{Binding OrderDate, UpdateSourceTrigger=PropertyChanged}" />
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                </GridView>
-            </ListView.View>
-        </ListView>
-            
-    </Grid>
+    </ScrollViewer>
 </UserControl>

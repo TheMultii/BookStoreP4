@@ -14,14 +14,31 @@
             <DataTemplate DataType="{x:Type viewmodels:OrderListingViewModel}">
                 <views:OrderListingView />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:BookListingViewModel}">
+                <views:BookListingView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:AuthorListingViewModel}">
+                <views:AuthorListingView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:CustomerListingViewModel}">
+                <views:CustomerListingView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:EmployeeListingViewModel}">
+                <views:EmployeeListingView />
+            </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodels:AddOrderViewModel}">
                 <views:AddOrderView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:AddOrderItemViewModel}">
+                <views:AddOrderItemView />
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodels:AddBookViewModel}">
                 <views:AddBookView />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:AddAuthorViewModel}">
+                <views:AddAuthorView />
+            </DataTemplate>
         </Grid.Resources>
-        
         <ContentControl Content="{Binding CurrentViewModel}"/>
     </Grid>
 </Window>

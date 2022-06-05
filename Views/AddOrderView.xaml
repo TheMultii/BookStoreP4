@@ -57,8 +57,8 @@
         </Grid>
 
         <StackPanel Orientation="Horizontal" Grid.Row="3">
-            <Button Margin="0 0 5 0" Content="Dodaj" Grid.Row="0" Grid.Column="0" Command="{Binding SubmitCommand}" />
-            <Button Margin="5 0 0 0" Command="{Binding CancelCommand}" Content="Anuluj" Grid.Row="0" Grid.Column="1" />
+            <Button Margin="0 0 5 0" Content="Dodaj" Command="{Binding SubmitCommand}" />
+            <Button Margin="5 0 0 0" Command="{Binding CancelCommand}" Content="Anuluj" />
         </StackPanel>
     </Grid>
 </UserControl>

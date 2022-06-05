@@ -7,15 +7,22 @@ namespace BookStoreP4.Models {
         public string Description { get; }
         public List<Author> Authors { get; }
         public float Price { get; }
-        public float VAT { get; }
+        public float? VAT { get; }
 
-        public Book(string isbn, string title, string description, List<Author> authors, float price, float vat) {
+        public Book(string isbn, string title, string description, List<Author> authors, float price, float? vat = null) {
             ISBN = isbn;
             Title = title;
             Description = description;
             Authors = authors;
             Price = price;
             VAT = vat;
+        }
+        public Book(string isbn, string title, string description, List<Author> authors, float price) {
+            ISBN = isbn;
+            Title = title;
+            Description = description;
+            Authors = authors;
+            Price = price;
         }
 
         public bool CheckForAuthor(string authorName, string authorSurname) {

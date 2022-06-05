@@ -23,5 +23,12 @@ namespace BookStoreP4.Models {
             OrderItems = new();
             OrderDate = DateTime.Now;
         }
+        public Order(int orderID, Employee employee, Customer customer, DateTime orderDate, List<OrderItem> orderItems) {
+            OrderID = orderID;
+            OrderEmployee = employee;
+            OrderCustomer = customer;
+            OrderItems = orderItems;
+            OrderDate = DateTime.Now;
+        }
     }
 }

@@ -1,112 +1,111 @@
 ﻿using BookStoreP4.Commands;
-using BookStoreP4.Models;
 using BookStoreP4.Services;
 using BookStoreP4.Stores;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Input;
 
 namespace BookStoreP4.ViewModels {
     public class AddBookViewModel : ViewModelBase {
 
-        private int _orderOrder;
-        public int OrderOrder {
+        private string _BookISBN;
+        public string BookISBN {
             get {
-                return _orderOrder;
+                return _BookISBN;
             }
             set {
-                _orderOrder = value;
-                OnPropertyChanged(nameof(OrderOrder));
-            }
-        }
-
-        private string _orderBookTitle;
-        public string OrderBookTitle {
-            get {
-                return _orderBookTitle;
-            }
-            set {
-                _orderBookTitle = value;
-                OnPropertyChanged(nameof(OrderBookTitle));
-            }
-        }
-
-        private string _orderBookDescription;
-        public string OrderBookDescription {
-            get {
-                return _orderBookDescription;
-            }
-            set {
-                _orderBookDescription = value;
-                OnPropertyChanged(nameof(OrderBookDescription));
-            }
-        }
-
-        private int _orderBookQuantity;
-        public int OrderBookQuantity {
-            get {
-                return _orderBookQuantity;
-            }
-            set {
-                if(value > 0) {
-                    _orderBookQuantity = value;
-                    OnPropertyChanged(nameof(OrderBookQuantity));
+                if (value.Length > 0 && value.All(char.IsDigit)) {
+                    _BookISBN = value;
+                    OnPropertyChanged(nameof(BookISBN));
                 }
             }
         }
 
-        private string _orderAuthorName;
-        public string OrderAuthorName {
+        private string _BookTitle;
+        public string BookTitle {
             get {
-                return _orderAuthorName;
+                return _BookTitle;
             }
             set {
-                _orderAuthorName = value;
-                OnPropertyChanged(nameof(OrderAuthorName));
+                _BookTitle = value;
+                OnPropertyChanged(nameof(BookTitle));
             }
         }
 
-        private string _orderAuthorSurname;
-        public string OrderAuthorSurname {
+        private string _BookDescription;
+        public string BookDescription {
             get {
-                return _orderAuthorSurname;
+                return _BookDescription;
             }
             set {
-                _orderAuthorSurname = value;
-                OnPropertyChanged(nameof(OrderAuthorSurname));
+                _BookDescription = value;
+                OnPropertyChanged(nameof(BookDescription));
             }
         }
 
-        private float _orderBookPrice;
-        public float OrderBookPrice {
+        private string _authorIDs;
+        public string AuthorIDs {
             get {
-                return _orderBookPrice;
+                return _authorIDs;
             }
             set {
-                if(value > 0) {
-                    _orderBookPrice = value;
-                    OnPropertyChanged(nameof(OrderBookPrice));
+                string toSet = "";
+                value = value.Replace(".", ",");
+                foreach (var splitted in value.Trim().Split(",")) {
+                    string temp = splitted.Trim();
+                    if (splitted.Length > 0 && int.TryParse(splitted, out int i) && i > 0) {
+                        toSet += splitted + ",";
+                    }
+                }
+
+                if (toSet.Length > 0 && toSet[toSet.Length - 1] == ',') {
+                    toSet = toSet.Remove(toSet.Length - 1);
+                }
+                _authorIDs = toSet;
+            }
+        }
+
+        internal float _BookPrice;
+        public string BookPrice {
+            get {
+                return _BookPrice.ToString();
+            }
+            set {
+                value = value.Replace(".", ",");
+                float f_value = float.Parse(value);
+                if (f_value > 0) {
+                    _BookPrice = f_value;
+                    OnPropertyChanged(nameof(BookPrice));
                 }
             }
         }
 
-        private float _orderBookVAT;
-        public float OrderBookVAT {
+        private float? _BookVAT;
+        public string? BookVAT {
             get {
-                return _orderBookVAT;
+                return _BookVAT.ToString();
             }
             set {
-                if(value >= 0 && value <= 1) {
-                    _orderBookVAT = value;
-                    OnPropertyChanged(nameof(OrderBookVAT));
+                value = value == null ? "" : value.Replace(".", ",");
+                float? f_value;
+                try {
+                    f_value = float.Parse(string.Format("{0:0.00}", float.Parse(value)));
+                } catch (Exception) {
+                    f_value = null;
+                }
+                if ((f_value >= 0 && f_value <= 1) || f_value == null) {
+                    _BookVAT = f_value;
+                    OnPropertyChanged(nameof(BookVAT));
                 }
             }
         }
-
+        
         public ICommand SubmitBookCommand { get; }
         public ICommand CancelCommand { get; }
 
-        public AddBookViewModel(OrderList orderList, NavigationService orderViewNavigationService) {
-            SubmitBookCommand = new AddBookCommand(this, orderList, orderViewNavigationService);
+        public AddBookViewModel(BookListStore bookListStore, NavigationService orderViewNavigationService) {
+            SubmitBookCommand = new AddBookCommand(this, bookListStore, orderViewNavigationService);
             CancelCommand = new NavigateCommand(orderViewNavigationService);
         }
     }

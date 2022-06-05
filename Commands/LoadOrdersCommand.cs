@@ -1,28 +1,31 @@
-﻿using BookStoreP4.Models;
+﻿using BookStoreP4.Stores;
 using BookStoreP4.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
 namespace BookStoreP4.Commands {
     public class LoadOrdersCommand : AsyncCommandBase {
         private readonly OrderListingViewModel _viewModel;
-        private readonly OrderList _orderList;
+        private readonly OrderListStore _orderListStore;
 
-        public LoadOrdersCommand(OrderListingViewModel viewModel, OrderList orderList) {
+        public LoadOrdersCommand(OrderListingViewModel viewModel, OrderListStore orderListStore) {
             _viewModel = viewModel;
-            _orderList = orderList;
+            _orderListStore = orderListStore;
         }
 
         public override async Task ExecuteAsync(object parameter) {
+            _viewModel.IsLoading = true;
             try {
-                IEnumerable<Order> orders = await _orderList.GetOrders();
-                _viewModel.UpdateOrders(orders);
+                await _orderListStore.Load();
+                
+                //await Task.Delay(TimeSpan.FromSeconds(2));
+                
+                _viewModel.UpdateOrders(_orderListStore.Orders);
             } catch(Exception) {
-                MessageBox.Show("Wystąpił błąd - nie udało się dodać zamówienia", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Wystąpił błąd - nie udało się wyświetlić zamówień", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+            } finally {
+                _viewModel.IsLoading = false;
             }
         }
     }

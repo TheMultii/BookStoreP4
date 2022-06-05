@@ -3,11 +3,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BookStoreP4.DTOs {
     public class OrderItemDTO {
-        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.None)]
         [Key]
         public int OrderItemID { get; set; }
         [Required]
-        public BookDTO OrderItemBook { get; set; }
+        public virtual BookDTO OrderItemBook { get; set; }
+        public virtual OrderDTO? OrderItemOrder { get; set; }
         [Required]
         public int Quantity { get; set; }
         [Required]

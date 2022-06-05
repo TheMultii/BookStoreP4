@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="BookStoreP4.Views.AddAuthorView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewmodels="clr-namespace:BookStoreP4.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:AddAuthorViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="600" MaxWidth="600" FontSize="14">
+    <Grid Margin="8" Grid.IsSharedSizeScope="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Style="{StaticResource Header}" Margin="0 0 0 30" Text="Dodaj Autora" Grid.Row="0" />
+
+        <Grid Grid.Row="1" Margin="0 0 0 10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" SharedSizeGroup="FirstColumn" />
+                <ColumnDefinition Width="auto" SharedSizeGroup="SecondColumn"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Imię" Grid.Row="0" Grid.Column="0" />
+            <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding AuthorName, UpdateSourceTrigger=PropertyChanged}" Margin="0 5 5 0" />
+
+            <TextBlock Text="Nazwisko" Grid.Row="0" Grid.Column="1" Margin="5 0 0 0" />
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding AuthorSurname, UpdateSourceTrigger=PropertyChanged}" Margin="5 5 0 0" />
+        </Grid>
+
+        <Grid Grid.Row="2">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" SharedSizeGroup="FirstColumn" />
+                <ColumnDefinition Width="Auto" SharedSizeGroup="SecondColumn"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Margin="0 0 5 0" Grid.Column="0" Content="Dodaj" Command="{Binding SubmitAuthorCommand}" />
+            <Button Margin="5 0 0 0" Grid.Column="1" Command="{Binding CancelCommand}" Content="Anuluj" />
+        </Grid>
+    </Grid>
+</UserControl>

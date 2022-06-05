@@ -16,7 +16,7 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Style="{StaticResource Header}" Margin="0 0 0 30" Text="Dodaj pozycję zamówienia" Grid.Row="0" />
+        <TextBlock Style="{StaticResource Header}" Margin="0 0 0 30" Text="Dodaj książkę" Grid.Row="0" />
 
         <Grid Grid.Row="1" Margin="0 0 0 10">
             <Grid.RowDefinitions>
@@ -26,10 +26,14 @@
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" SharedSizeGroup="FirstColumn" />
+                <ColumnDefinition Width="auto" SharedSizeGroup="SecondColumn" />
             </Grid.ColumnDefinitions>
 
-            <TextBlock Text="Wybierz Zamówienie" Grid.Row="0" Grid.Column="0" />
-            <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding OrderOrder, UpdateSourceTrigger=PropertyChanged}" Margin="0 5 0 0" />
+            <TextBlock Grid.Column="0" Text="Tytuł książki" Grid.Row="0" />
+            <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding BookTitle, UpdateSourceTrigger=PropertyChanged}" Margin="0 5 0 0" />
+
+            <TextBlock Grid.Column="1" Text="Wpisz opis ksiażki" Grid.Row="0" Margin="5 5 0 0" />
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding BookDescription, UpdateSourceTrigger=PropertyChanged}"  Margin="5 5 0 0" />
         </Grid>
 
         <Grid Grid.Row="2" Margin="0 0 0 10">
@@ -41,38 +45,16 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" SharedSizeGroup="FirstColumn" />
                 <ColumnDefinition Width="auto" SharedSizeGroup="SecondColumn" />
-                <ColumnDefinition Width="auto" SharedSizeGroup="ThirdColumn" />
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Column="0" Text="Tytuł książki" Grid.Row="0" />
-            <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding OrderBookTitle, UpdateSourceTrigger=PropertyChanged}" Margin="0 5 0 0" />
+            <TextBlock Grid.Column="0" Text="Wybierz autora/autorów" Grid.Row="0" />
+            <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding AuthorIDs, UpdateSourceTrigger=PropertyChanged}" Margin="0 5 0 0" />
 
-            <TextBlock Grid.Column="1" Text="Wpisz opis ksiażki" Grid.Row="0" Margin="5 5 0 0" />
-            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding OrderBookDescription, UpdateSourceTrigger=PropertyChanged}"  Margin="5 5 0 0" />
-
-            <TextBlock Grid.Column="2" Text="Wpisz ilość kupionych książek" Grid.Row="0" Margin="5 5 0 0" />
-            <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding OrderBookQuantity, UpdateSourceTrigger=PropertyChanged}"  Margin="5 5 0 0" />
+            <TextBlock Grid.Column="1" Margin="5 5 0 0" Text="Wpisz ISBN" Grid.Row="0" />
+            <TextBox Grid.Row="1" Margin="5 5 0 0" Grid.Column="1" Text="{Binding BookISBN, UpdateSourceTrigger=PropertyChanged}" />
         </Grid>
 
         <Grid Grid.Row="3" Margin="0 0 0 10">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto" SharedSizeGroup="FirstColumn" />
-                <ColumnDefinition Width="auto" SharedSizeGroup="SecondColumn" />
-            </Grid.ColumnDefinitions>
-
-            <TextBlock Grid.Column="0" Text="Imię autora" Grid.Row="0" />
-            <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding OrderAuthorName, UpdateSourceTrigger=PropertyChanged}" Margin="0 5 0 0" />
-
-            <TextBlock Grid.Column="1" Text="Nazwisko autora" Grid.Row="0" Margin="5 5 0 0" />
-            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding OrderAuthorSurname, UpdateSourceTrigger=PropertyChanged}"  Margin="5 5 0 0" />
-        </Grid>
-
-        <Grid Grid.Row="4" Margin="0 0 0 10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
@@ -85,15 +67,15 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Column="0" Text="Cena książki" Grid.Row="0" />
-            <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding OrderBookPrice, UpdateSourceTrigger=PropertyChanged}" Margin="0 5 0 0" />
+            <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding BookPrice, UpdateSourceTrigger=LostFocus}" Margin="0 5 0 0" />
 
             <TextBlock Grid.Column="1" Text="Podatek VAT za książkę" Grid.Row="0" Margin="5 5 0 0" />
-            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding OrderBookVAT, UpdateSourceTrigger=PropertyChanged}"  Margin="5 5 0 0" />
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding BookVAT, UpdateSourceTrigger=LostFocus, TargetNullValue=''}"  Margin="5 5 0 0" />
         </Grid>
 
         <StackPanel Orientation="Horizontal" Grid.Row="5">
-            <Button Margin="0 0 5 0" Content="Dodaj" Grid.Row="0" Grid.Column="0" Command="{Binding SubmitBookCommand}" />
-            <Button Margin="5 0 0 0" Command="{Binding CancelCommand}" Content="Anuluj" Grid.Row="0" Grid.Column="1" />
+            <Button Margin="0 0 5 0" Content="Dodaj" Command="{Binding SubmitBookCommand}" />
+            <Button Margin="5 0 0 0" Command="{Binding CancelCommand}" Content="Anuluj" />
         </StackPanel>
     </Grid>
 </UserControl>

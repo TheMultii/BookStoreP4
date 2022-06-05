@@ -22,6 +22,21 @@ namespace BookStoreP4.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("AuthorDTOBookDTO", b =>
+                {
+                    b.Property<int>("AuthorsAuthorID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("BooksISBN")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("AuthorsAuthorID", "BooksISBN");
+
+                    b.HasIndex("BooksISBN");
+
+                    b.ToTable("AuthorDTOBookDTO");
+                });
+
             modelBuilder.Entity("BookStoreP4.DTOs.AuthorDTO", b =>
                 {
                     b.Property<int>("AuthorID")
@@ -38,12 +53,7 @@ namespace BookStoreP4.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("BookDTOISBN")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("AuthorID");
-
-                    b.HasIndex("BookDTOISBN");
 
                     b.ToTable("Authors");
                 });
@@ -174,10 +184,7 @@ namespace BookStoreP4.Migrations
             modelBuilder.Entity("BookStoreP4.DTOs.OrderItemDTO", b =>
                 {
                     b.Property<int>("OrderItemID")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderItemID"), 1L, 1);
 
                     b.Property<float>("BookBruttoValue")
                         .HasColumnType("real");
@@ -191,30 +198,38 @@ namespace BookStoreP4.Migrations
                     b.Property<float?>("BookVAT")
                         .HasColumnType("real");
 
-                    b.Property<int?>("OrderDTOOrderID")
-                        .HasColumnType("int");
-
                     b.Property<string>("OrderItemBookISBN")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<int?>("OrderItemOrderOrderID")
+                        .HasColumnType("int");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
                     b.HasKey("OrderItemID");
 
-                    b.HasIndex("OrderDTOOrderID");
-
                     b.HasIndex("OrderItemBookISBN");
+
+                    b.HasIndex("OrderItemOrderOrderID");
 
                     b.ToTable("OrderItems");
                 });
 
-            modelBuilder.Entity("BookStoreP4.DTOs.AuthorDTO", b =>
+            modelBuilder.Entity("AuthorDTOBookDTO", b =>
                 {
+                    b.HasOne("BookStoreP4.DTOs.AuthorDTO", null)
+                        .WithMany()
+                        .HasForeignKey("AuthorsAuthorID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("BookStoreP4.DTOs.BookDTO", null)
-                        .WithMany("Authors")
-                        .HasForeignKey("BookDTOISBN");
+                        .WithMany()
+                        .HasForeignKey("BooksISBN")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("BookStoreP4.DTOs.OrderDTO", b =>
@@ -234,22 +249,19 @@ namespace BookStoreP4.Migrations
 
             modelBuilder.Entity("BookStoreP4.DTOs.OrderItemDTO", b =>
                 {
-                    b.HasOne("BookStoreP4.DTOs.OrderDTO", null)
-                        .WithMany("OrderItems")
-                        .HasForeignKey("OrderDTOOrderID");
-
                     b.HasOne("BookStoreP4.DTOs.BookDTO", "OrderItemBook")
                         .WithMany()
                         .HasForeignKey("OrderItemBookISBN")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("OrderItemBook");
-                });
+                    b.HasOne("BookStoreP4.DTOs.OrderDTO", "OrderItemOrder")
+                        .WithMany("OrderItems")
+                        .HasForeignKey("OrderItemOrderOrderID");
 
-            modelBuilder.Entity("BookStoreP4.DTOs.BookDTO", b =>
-                {
-                    b.Navigation("Authors");
+                    b.Navigation("OrderItemBook");
+
+                    b.Navigation("OrderItemOrder");
                 });
 
             modelBuilder.Entity("BookStoreP4.DTOs.OrderDTO", b =>

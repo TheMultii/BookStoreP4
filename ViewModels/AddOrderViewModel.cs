@@ -1,5 +1,4 @@
 ﻿using BookStoreP4.Commands;
-using BookStoreP4.Models;
 using BookStoreP4.Services;
 using BookStoreP4.Stores;
 using System;
@@ -44,8 +43,8 @@ namespace BookStoreP4.ViewModels {
         public ICommand SubmitCommand { get; }
         public ICommand CancelCommand { get; }
 
-        public AddOrderViewModel(OrderList orderList, NavigationService orderViewNavigationService) {
-            SubmitCommand = new AddOrderCommand(this, orderList, orderViewNavigationService);
+        public AddOrderViewModel(OrderListStore orderListStore, NavigationService orderViewNavigationService) {
+            SubmitCommand = new AddOrderCommand(this, orderListStore, orderViewNavigationService);
             CancelCommand = new NavigateCommand(orderViewNavigationService);
         }
     }

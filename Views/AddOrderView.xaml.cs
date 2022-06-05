@@ -17,8 +17,8 @@ namespace BookStoreP4.Views {
     /// <summary>
     /// Logika interakcji dla klasy AddOrderView.xaml
     /// </summary>
-    public partial class AddOrderView : UserControl {
-        public AddOrderView() {
+    public partial class AddOrderItemView : UserControl {
+        public AddOrderItemView() {
             InitializeComponent();
         }
     }
