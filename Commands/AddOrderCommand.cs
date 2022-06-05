@@ -71,6 +71,8 @@ namespace BookStoreP4.Commands {
                     p,
                     _addOrderViewModel.OrderDateTime
                 );
+				
+				//receive added order and update orderListStore to not display faker user data
 
                 await _orderListStore.AddOrder(newOrder);
 
