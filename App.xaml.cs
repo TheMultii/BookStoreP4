@@ -81,13 +81,13 @@ namespace BookStoreP4 {
         private AddOrderItemViewModel CreateAddOrderItemViewModel() => new(_orderListStore, new Services.NavigationService(_navigationStore, CreateOrderListingViewModel));
         private AddBookViewModel CreateAddBookViewModel() => new(_bookListStore, new Services.NavigationService(_navigationStore, CreateBookListingViewModel));
         private AddAuthorViewModel CreateAddAuthorViewModel() => new(_authorListStore, new Services.NavigationService(_navigationStore, CreateAuthorListingViewModel));
-        //add customer TODO
-        //add employee TODO
-
+        private AddCustomerViewModel CreateAddCustomerViewModel() => new(_customerListStore, new Services.NavigationService(_navigationStore, CreateCustomerListingViewModel));
+        private AddEmployeeViewModel CreateAddEmployeeViewModel() => new(_employeeListStore, new Services.NavigationService(_navigationStore, CreateEmployeeListingViewModel));
+        
         private OrderListingViewModel CreateOrderListingViewModel() => OrderListingViewModel.LoadViewModel(_orderListStore, new Services.NavigationService(_navigationStore, CreateAddOrderViewModel), new Services.NavigationService(_navigationStore, CreateAddBookViewModel), new Services.NavigationService(_navigationStore, CreateBookListingViewModel), new Services.NavigationService(_navigationStore, CreateAuthorListingViewModel), new Services.NavigationService(_navigationStore, CreateCustomerListingViewModel), new Services.NavigationService(_navigationStore, CreateEmployeeListingViewModel), new Services.NavigationService(_navigationStore, CreateAddOrderItemViewModel));
         private BookListingViewModel CreateBookListingViewModel() => BookListingViewModel.LoadViewModel(_bookListStore, new Services.NavigationService(_navigationStore, CreateOrderListingViewModel), new Services.NavigationService(_navigationStore, CreateAddBookViewModel));
         private AuthorListingViewModel CreateAuthorListingViewModel() => AuthorListingViewModel.LoadViewModel(_authorListStore, new Services.NavigationService(_navigationStore, CreateOrderListingViewModel), new Services.NavigationService(_navigationStore, CreateAddAuthorViewModel));
-        private CustomerListingViewModel CreateCustomerListingViewModel() => CustomerListingViewModel.LoadViewModel(_customerListStore, new Services.NavigationService(_navigationStore, CreateOrderListingViewModel), new Services.NavigationService(_navigationStore, CreateAddAuthorViewModel));
-        private EmployeeListingViewModel CreateEmployeeListingViewModel() => EmployeeListingViewModel.LoadViewModel(_employeeListStore, new Services.NavigationService(_navigationStore, CreateOrderListingViewModel), new Services.NavigationService(_navigationStore, CreateAddAuthorViewModel));
+        private CustomerListingViewModel CreateCustomerListingViewModel() => CustomerListingViewModel.LoadViewModel(_customerListStore, new Services.NavigationService(_navigationStore, CreateOrderListingViewModel), new Services.NavigationService(_navigationStore, CreateAddCustomerViewModel));
+        private EmployeeListingViewModel CreateEmployeeListingViewModel() => EmployeeListingViewModel.LoadViewModel(_employeeListStore, new Services.NavigationService(_navigationStore, CreateOrderListingViewModel), new Services.NavigationService(_navigationStore, CreateAddEmployeeViewModel));
     }
 }

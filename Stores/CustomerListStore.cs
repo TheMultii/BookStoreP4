@@ -20,7 +20,7 @@ namespace BookStoreP4.Stores {
             await _initializeLazy.Value;
         }
         
-        public async Task AddAuthor(Customer newCustomer) {
+        public async Task AddCustomer(Customer newCustomer) {
             Customer added = await _customerList.AddCustomer(newCustomer);
             _customers.Add(added);
         }

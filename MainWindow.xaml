@@ -8,7 +8,17 @@
         xmlns:viewmodels="clr-namespace:BookStoreP4.ViewModels"
         d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
         mc:Ignorable="d"
-        Title="Księgarnia" Height="450" Width="800" Icon="/Assets/Circle-Book.ico">
+        WindowStyle="None"
+        AllowsTransparency="True"
+        ResizeMode="CanResizeWithGrip"
+        WindowStartupLocation="CenterScreen"
+        Background="Transparent"
+        MinWidth="600"
+        MinHeight="360"
+        Title="Księgarnia"
+        Width="800"
+        Height="600"
+        Icon="/Assets/Circle-Book.ico">
     <Grid>
         <Grid.Resources>
             <DataTemplate DataType="{x:Type viewmodels:OrderListingViewModel}">
@@ -38,7 +48,54 @@
             <DataTemplate DataType="{x:Type viewmodels:AddAuthorViewModel}">
                 <views:AddAuthorView />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:AddCustomerViewModel}">
+                <views:AddCustomerView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:AddEmployeeViewModel}">
+                <views:AddEmployeeView />
+            </DataTemplate>
         </Grid.Resources>
-        <ContentControl Content="{Binding CurrentViewModel}"/>
+        
+        <Border Background="#282D33" BorderBrush="#3A4149" BorderThickness="5" CornerRadius="8,8,0,8" />
+
+        <Button Style="{StaticResource TransparentStyle}" Command="{Binding ShowAuthorModalCommand}" Height="auto" VerticalAlignment="Top" Margin="0 10" HorizontalAlignment="Center" Background="Transparent">
+            <Border BorderBrush="Yellow" BorderThickness="3 0" Background="#36404D" CornerRadius="2">
+                <TextBlock Foreground="#ffffff" Padding="10 5" Text="KSIĘGARNIA" />
+            </Border>
+        </Button>
+
+        <Button Command="{Binding MinimizeAppCommand}" Width="30" Height="30" Margin="0 10 90 0" VerticalAlignment="Top" HorizontalAlignment="Right">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+            <TextBlock Foreground="yellow" FontWeight="Bold">_</TextBlock>
+        </Button>
+
+        <Button Command="{Binding MaximizeAppCommand}" Width="30" Height="30" Margin="0 10 50 0" VerticalAlignment="Top" HorizontalAlignment="Right">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+            <TextBlock Foreground="yellow" FontWeight="Bold">^</TextBlock>
+        </Button>
+
+        <Button Command="{Binding CloseAppCommand}" Width="30" Height="30" Margin="0 10 10 0" VerticalAlignment="Top" HorizontalAlignment="Right">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+            <Image Width="8" Height="8">
+                <Image.Source>
+                    <BitmapImage UriSource="./Assets/shutdown_def.png"/>
+                </Image.Source>
+            </Image>
+        </Button>
+
+        <ContentControl Margin="40 60 40 0" Content="{Binding CurrentViewModel}" />
+
     </Grid>
 </Window>

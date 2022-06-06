@@ -6,7 +6,7 @@
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:local="clr-namespace:BookStoreP4.Views" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:viewmodels="clr-namespace:BookStoreP4.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:AddOrderItemViewModel}"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="600" MaxWidth="600" FontSize="14">
+             d:DesignHeight="450" d:DesignWidth="600" MaxWidth="1200" FontSize="14">
     <Grid Margin="8" Grid.IsSharedSizeScope="True">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -28,10 +28,10 @@
                 <ColumnDefinition Width="auto" SharedSizeGroup="SecondColumn"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Text="Wybierz książkę" Grid.Row="0" Grid.Column="0" />
+            <TextBlock Style="{StaticResource TextBlockWhite}" Text="Wybierz książkę" Grid.Row="0" Grid.Column="0" />
             <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding OrderItemBook, UpdateSourceTrigger=PropertyChanged}" Margin="0 5 5 0" />
 
-            <TextBlock Text="Wybierz zamówienie" Grid.Row="0" Grid.Column="1" Margin="5 0 0 0" />
+            <TextBlock Style="{StaticResource TextBlockWhite}" Text="Wybierz zamówienie" Grid.Row="0" Grid.Column="1" Margin="5 0 0 0" />
             <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding OrderItemOrder, UpdateSourceTrigger=PropertyChanged}" Margin="5 5 0 0" />
         </Grid>
 
@@ -45,7 +45,7 @@
                 <ColumnDefinition Width="auto" SharedSizeGroup="FirstColumn" />
             </Grid.ColumnDefinitions>
 
-            <TextBlock Text="Wprowadź ilość" Grid.Row="0" />
+            <TextBlock Style="{StaticResource TextBlockWhite}" Text="Wprowadź ilość" Grid.Row="0" />
             <TextBox Grid.Row="1" Text="{Binding OrderItemQuantity, UpdateSourceTrigger=PropertyChanged}" Margin="0 5 5 0" />
         </Grid>
 

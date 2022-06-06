@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BookStoreP4.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="600" MaxWidth="600">
+             d:DesignHeight="450" d:DesignWidth="600" MaxWidth="1200">
     <Grid Margin="8" Grid.IsSharedSizeScope="True">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -29,10 +29,10 @@
                 <ColumnDefinition Width="auto" SharedSizeGroup="SecondColumn" />
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Column="0" Text="Tytuł książki" Grid.Row="0" />
+            <TextBlock Style="{StaticResource TextBlockWhite}" Grid.Column="0" Text="Tytuł książki" Grid.Row="0" />
             <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding BookTitle, UpdateSourceTrigger=PropertyChanged}" Margin="0 5 0 0" />
 
-            <TextBlock Grid.Column="1" Text="Wpisz opis ksiażki" Grid.Row="0" Margin="5 5 0 0" />
+            <TextBlock Style="{StaticResource TextBlockWhite}" Grid.Column="1" Text="Wpisz opis ksiażki" Grid.Row="0" Margin="5 5 0 0" />
             <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding BookDescription, UpdateSourceTrigger=PropertyChanged}"  Margin="5 5 0 0" />
         </Grid>
 
@@ -47,10 +47,10 @@
                 <ColumnDefinition Width="auto" SharedSizeGroup="SecondColumn" />
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Column="0" Text="Wybierz autora/autorów" Grid.Row="0" />
+            <TextBlock Style="{StaticResource TextBlockWhite}" Grid.Column="0" Text="Wybierz autora/autorów" Grid.Row="0" />
             <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding AuthorIDs, UpdateSourceTrigger=PropertyChanged}" Margin="0 5 0 0" />
 
-            <TextBlock Grid.Column="1" Margin="5 5 0 0" Text="Wpisz ISBN" Grid.Row="0" />
+            <TextBlock Style="{StaticResource TextBlockWhite}" Grid.Column="1" Margin="5 5 0 0" Text="Wpisz ISBN" Grid.Row="0" />
             <TextBox Grid.Row="1" Margin="5 5 0 0" Grid.Column="1" Text="{Binding BookISBN, UpdateSourceTrigger=PropertyChanged}" />
         </Grid>
 
@@ -66,10 +66,10 @@
                 <ColumnDefinition Width="auto" SharedSizeGroup="ThirdColumn" />
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Column="0" Text="Cena książki" Grid.Row="0" />
+            <TextBlock Style="{StaticResource TextBlockWhite}" Grid.Column="0" Text="Cena książki" Grid.Row="0" />
             <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding BookPrice, UpdateSourceTrigger=LostFocus}" Margin="0 5 0 0" />
 
-            <TextBlock Grid.Column="1" Text="Podatek VAT za książkę" Grid.Row="0" Margin="5 5 0 0" />
+            <TextBlock Style="{StaticResource TextBlockWhite}" Grid.Column="1" Text="Podatek VAT za książkę" Grid.Row="0" Margin="5 5 0 0" />
             <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding BookVAT, UpdateSourceTrigger=LostFocus, TargetNullValue=''}"  Margin="5 5 0 0" />
         </Grid>
 

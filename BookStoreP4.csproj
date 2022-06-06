@@ -10,6 +10,7 @@
   <ItemGroup>
     <None Remove="Assets\Circle-Book.ico" />
     <None Remove="Assets\Circle-Books.ico" />
+    <None Remove="Assets\shutdown_def.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,9 +32,16 @@
 
   <ItemGroup>
     <Resource Include="Assets\Circle-Book.ico" />
+    <Resource Include="Assets\shutdown_def.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\AddEmployeeView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\AddCustomerView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\AddAuthorView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -55,6 +63,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="Views\AddEmployeeView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\AddCustomerView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\AddAuthorView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>

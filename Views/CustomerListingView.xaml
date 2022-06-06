@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BookStoreP4.Views" xmlns:viewmodels="clr-namespace:BookStoreP4.ViewModels" xmlns:converters="clr-namespace:BookStoreP4.Converters" xmlns:loadingspinnercontrol="clr-namespace:LoadingSpinnerControl;assembly=LoadingSpinnerControl" d:DataContext="{d:DesignInstance Type=viewmodels:CustomerListingViewModel}"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="600" MaxWidth="600" FontSize="14">
+             d:DesignHeight="450" d:DesignWidth="600" MaxWidth="1200" FontSize="14">
     <UserControl.Resources>
         <converters:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter" />
     </UserControl.Resources>
@@ -42,7 +42,7 @@
                             <GridViewColumn Header="ID Klienta">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock HorizontalAlignment="Center" Text="{Binding CustomerID, UpdateSourceTrigger=PropertyChanged}" />
+                                        <TextBlock Style="{StaticResource ListViewItem}" HorizontalAlignment="Center" Text="{Binding CustomerID, UpdateSourceTrigger=PropertyChanged}" />
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
@@ -50,7 +50,7 @@
                             <GridViewColumn Header="Imię">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock HorizontalAlignment="Center" Text="{Binding CustomerName, UpdateSourceTrigger=PropertyChanged}" />
+                                        <TextBlock Style="{StaticResource ListViewItem}" HorizontalAlignment="Center" Text="{Binding CustomerName, UpdateSourceTrigger=PropertyChanged}" />
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
@@ -58,7 +58,7 @@
                             <GridViewColumn Header="Nazwisko">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock HorizontalAlignment="Center" Text="{Binding CustomerSurname, UpdateSourceTrigger=PropertyChanged}" />
+                                        <TextBlock Style="{StaticResource ListViewItem}" HorizontalAlignment="Center" Text="{Binding CustomerSurname, UpdateSourceTrigger=PropertyChanged}" />
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
@@ -66,7 +66,7 @@
                             <GridViewColumn Header="Email">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock HorizontalAlignment="Center" Text="{Binding CustomerEmail, UpdateSourceTrigger=PropertyChanged}" />
+                                        <TextBlock Style="{StaticResource ListViewItem}" HorizontalAlignment="Center" Text="{Binding CustomerEmail, UpdateSourceTrigger=PropertyChanged}" />
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
@@ -74,7 +74,7 @@
                             <GridViewColumn Header="Ulica">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock HorizontalAlignment="Center" Text="{Binding CustomerStreet, UpdateSourceTrigger=PropertyChanged}" />
+                                        <TextBlock Style="{StaticResource ListViewItem}" HorizontalAlignment="Center" Text="{Binding CustomerStreet, UpdateSourceTrigger=PropertyChanged}" />
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
@@ -82,7 +82,7 @@
                             <GridViewColumn Header="Miasto">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock HorizontalAlignment="Center" Text="{Binding CustomerCity, UpdateSourceTrigger=PropertyChanged}" />
+                                        <TextBlock Style="{StaticResource ListViewItem}" HorizontalAlignment="Center" Text="{Binding CustomerCity, UpdateSourceTrigger=PropertyChanged}" />
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
@@ -90,7 +90,7 @@
                             <GridViewColumn Header="PESEL">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock HorizontalAlignment="Center" Text="{Binding CustomerPESEL, UpdateSourceTrigger=PropertyChanged}" />
+                                        <TextBlock Style="{StaticResource ListViewItem}" HorizontalAlignment="Center" Text="{Binding CustomerPESEL, UpdateSourceTrigger=PropertyChanged}" />
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>

@@ -4,6 +4,7 @@ using BookStoreP4.Services;
 using BookStoreP4.Stores;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace BookStoreP4.ViewModels {
@@ -23,6 +24,8 @@ namespace BookStoreP4.ViewModels {
                 OnPropertyChanged(nameof(IsLoading));
             }
         }
+
+        public OrderViewModel? SelectedOrderViewModel = null;
 
         public ICommand LoadOrdersCommand { get; }
         public ICommand AddOrderCommand { get; }

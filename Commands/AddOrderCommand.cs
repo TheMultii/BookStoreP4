@@ -66,13 +66,11 @@ namespace BookStoreP4.Commands {
                 Customer p = new(_addOrderViewModel.OrderEmployeeID, samples[1].FirstName, samples[1].LastName, samples[1].Email, samples[1].Ulica, samples[1].Miasto, samples[1].PESEL);
                 
                 Order newOrder = new(
-                    int.MaxValue,
+                    _addOrderViewModel.OrderID,
                     e,
                     p,
                     _addOrderViewModel.OrderDateTime
                 );
-				
-				//receive added order and update orderListStore to not display faker user data
 
                 await _orderListStore.AddOrder(newOrder);
 

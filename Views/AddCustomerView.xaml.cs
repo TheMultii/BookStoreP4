@@ -15,18 +15,11 @@ using System.Windows.Shapes;
 
 namespace BookStoreP4.Views {
     /// <summary>
-    /// Logika interakcji dla klasy OrderListingView.xaml
+    /// Logika interakcji dla klasy AddOrderView.xaml
     /// </summary>
-    public partial class OrderListingView : UserControl {
-        public OrderListingView() {
+    public partial class AddCustomerView : UserControl {
+        public AddCustomerView() {
             InitializeComponent();
-        }
-
-        private void ListView_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) {
-            var item = (sender as ListView).SelectedItem;
-            if (item != null) {
-                App.Current.Properties["SelectedOrder"] = item;
-            }
         }
     }
 }

@@ -1,7 +1,4 @@
 ﻿using BookStoreP4.Services;
-using BookStoreP4.Stores;
-using BookStoreP4.ViewModels;
-using System;
 
 namespace BookStoreP4.Commands {
     public class NavigateCommand : CommandBase {

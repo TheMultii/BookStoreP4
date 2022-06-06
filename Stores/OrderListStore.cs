@@ -21,8 +21,14 @@ namespace BookStoreP4.Stores {
         }
 
         public async Task AddOrder(Order newOrder) {
-            await _orderList.AddOrder(newOrder);
-            _orders.Add(newOrder);
+            Order order = await _orderList.AddOrder(newOrder);
+            
+            if (!_orders.Exists(o => o.OrderID == order.OrderID)) {
+                _orders.Add(order);
+            } else {
+                int index = _orders.FindIndex(o => o.OrderID == order.OrderID);
+                _orders[index] = order;
+            }
         }
 
         public async Task AddOrderItem(OrderItem newOrderItem) {

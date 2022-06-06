@@ -6,7 +6,7 @@ namespace BookStoreP4.Models {
         public int OrderID { get; }
         public Employee OrderEmployee { get; }
         public Customer OrderCustomer { get; }
-        public List<OrderItem> OrderItems { get; }
+        public List<OrderItem> OrderItems { get; set; }
         public DateTime OrderDate { get; }
 
         public Order(int orderID, Employee employee, Customer customer, DateTime orderDate) {
@@ -28,7 +28,7 @@ namespace BookStoreP4.Models {
             OrderEmployee = employee;
             OrderCustomer = customer;
             OrderItems = orderItems;
-            OrderDate = DateTime.Now;
+            OrderDate = orderDate;
         }
     }
 }

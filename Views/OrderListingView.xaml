@@ -2,10 +2,10 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:BookStoreP4.Views" xmlns:viewmodels="clr-namespace:BookStoreP4.ViewModels" xmlns:converters="clr-namespace:BookStoreP4.Converters" xmlns:loadingspinnercontrol="clr-namespace:LoadingSpinnerControl;assembly=LoadingSpinnerControl" d:DataContext="{d:DesignInstance Type=viewmodels:OrderListingViewModel}"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewmodels="clr-namespace:BookStoreP4.ViewModels" xmlns:converters="clr-namespace:BookStoreP4.Converters" xmlns:loadingspinnercontrol="clr-namespace:LoadingSpinnerControl;assembly=LoadingSpinnerControl" d:DataContext="{d:DesignInstance Type=viewmodels:OrderListingViewModel}"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="600" MaxWidth="600" FontSize="14">
+             d:DesignHeight="450" d:DesignWidth="600" MaxWidth="1200" FontSize="14">
     <UserControl.Resources>
         <converters:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter" />
     </UserControl.Resources>
@@ -32,18 +32,19 @@
             <Grid Grid.Row="1">
                 <loadingspinnercontrol:LoadingSpinner Thickness="2" Color="red" Diameter="25" IsLoading="{Binding IsLoading}" />
 
-                <ListView ItemsSource="{Binding Orders}" Visibility="{Binding IsLoading,Converter={StaticResource InverseBooleanToVisibilityConverter}}">
+                <ListView ItemsSource="{Binding Orders}" PreviewMouseLeftButtonUp="ListView_PreviewMouseLeftButtonUp"  Visibility="{Binding IsLoading,Converter={StaticResource InverseBooleanToVisibilityConverter}}">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                         </Style>
                     </ListView.ItemContainerStyle>
+
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="ID Zamówienia">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock HorizontalAlignment="Center" Text="{Binding OrderID, UpdateSourceTrigger=PropertyChanged}" />
+                                        <TextBlock Style="{StaticResource ListViewItem}" HorizontalAlignment="Center" Text="{Binding OrderID, UpdateSourceTrigger=PropertyChanged}" />
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
@@ -51,7 +52,7 @@
                             <GridViewColumn Header="Klient">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock HorizontalAlignment="Center" Text="{Binding OrderCustomer, UpdateSourceTrigger=PropertyChanged}" />
+                                        <TextBlock Style="{StaticResource ListViewItem}" HorizontalAlignment="Center" Text="{Binding OrderCustomer, UpdateSourceTrigger=PropertyChanged}" />
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
@@ -59,7 +60,7 @@
                             <GridViewColumn Header="Pracownik">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock HorizontalAlignment="Center" Text="{Binding OrderEmployee, UpdateSourceTrigger=PropertyChanged}" />
+                                        <TextBlock Style="{StaticResource ListViewItem}" HorizontalAlignment="Center" Text="{Binding OrderEmployee, UpdateSourceTrigger=PropertyChanged}" />
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
@@ -67,7 +68,7 @@
                             <GridViewColumn Header="Ilość pozycji">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock HorizontalAlignment="Center" Text="{Binding OrderItemsCount, UpdateSourceTrigger=PropertyChanged}" />
+                                        <TextBlock Style="{StaticResource ListViewItem}" HorizontalAlignment="Center" Text="{Binding OrderItemsCount, UpdateSourceTrigger=PropertyChanged}" />
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
@@ -75,7 +76,7 @@
                             <GridViewColumn Header="Wartość">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock HorizontalAlignment="Center" Text="{Binding OrderItemsValue, UpdateSourceTrigger=PropertyChanged}" />
+                                        <TextBlock Style="{StaticResource ListViewItem}" HorizontalAlignment="Center" Text="{Binding OrderItemsValue, UpdateSourceTrigger=PropertyChanged}" />
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
@@ -83,7 +84,7 @@
                             <GridViewColumn Header="Data Zamówienia">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock HorizontalAlignment="Center" Text="{Binding OrderDate, UpdateSourceTrigger=PropertyChanged}" />
+                                        <TextBlock Style="{StaticResource ListViewItem}" HorizontalAlignment="Center" Text="{Binding OrderDate, UpdateSourceTrigger=PropertyChanged}" />
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>

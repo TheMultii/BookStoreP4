@@ -8,6 +8,8 @@ namespace BookStoreP4.ViewModels {
         private readonly Order _order;
 
         public int OrderID => _order.OrderID;
+        public Employee OrderEmployeeObject => _order.OrderEmployee;
+        public Customer OrderCustomerObject => _order.OrderCustomer;
         public string? OrderEmployee => _order.OrderEmployee?.ToString();
         public string? OrderCustomer => _order.OrderCustomer?.ToString();
         public List<OrderItem> OrderItems => _order.OrderItems;

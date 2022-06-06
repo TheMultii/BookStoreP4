@@ -1,8 +1,8 @@
 ﻿namespace BookStoreP4.Models {
     public class Customer {
         public int CustomerID { get; }
-        public string CustomerName { get; }
-        public string CustomerSurname { get; }
+        public string CustomerName { get; set; }
+        public string CustomerSurname { get; set; }
         public string CustomerEmail { get; }
         public string CustomerStreet { get; }
         public string CustomerCity { get; }

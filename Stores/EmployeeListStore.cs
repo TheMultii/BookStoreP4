@@ -20,7 +20,7 @@ namespace BookStoreP4.Stores {
             await _initializeLazy.Value;
         }
         
-        public async Task AddAuthor(Employee newEmployee) {
+        public async Task AddEmployee(Employee newEmployee) {
             Employee added = await _employeeList.AddEmployee(newEmployee);
             _employees.Add(added);
         }

@@ -1,8 +1,8 @@
 ﻿namespace BookStoreP4.Models {
     public class Employee {
         public int EmployeeID { get; }
-        public string EmployeeName { get; }
-        public string EmployeeSurname { get; }
+        public string EmployeeName { get; set; }
+        public string EmployeeSurname { get; set; }
         public string EmployeeEmail { get; }
         public string EmployeeStreet { get; }
         public string EmployeeCity { get; }

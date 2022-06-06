@@ -31,9 +31,9 @@ namespace BookStoreP4.ViewModels {
         public ICommand SubmitAuthorCommand { get; }
         public ICommand CancelCommand { get; }
 
-        public AddAuthorViewModel(AuthorListStore authorListStore, NavigationService orderViewNavigationService) {
-            SubmitAuthorCommand = new AddAuthorCommand(this, authorListStore, orderViewNavigationService);
-            CancelCommand = new NavigateCommand(orderViewNavigationService);
+        public AddAuthorViewModel(AuthorListStore authorListStore, NavigationService authorViewNavigationService) {
+            SubmitAuthorCommand = new AddAuthorCommand(this, authorListStore, authorViewNavigationService);
+            CancelCommand = new NavigateCommand(authorViewNavigationService);
         }
     }
 }
