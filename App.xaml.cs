@@ -83,7 +83,7 @@ namespace BookStoreP4 {
         private AddAuthorViewModel CreateAddAuthorViewModel() => new(_authorListStore, new Services.NavigationService(_navigationStore, CreateAuthorListingViewModel));
         //add customer TODO
         //add employee TODO
-        
+
         private OrderListingViewModel CreateOrderListingViewModel() => OrderListingViewModel.LoadViewModel(_orderListStore, new Services.NavigationService(_navigationStore, CreateAddOrderViewModel), new Services.NavigationService(_navigationStore, CreateAddBookViewModel), new Services.NavigationService(_navigationStore, CreateBookListingViewModel), new Services.NavigationService(_navigationStore, CreateAuthorListingViewModel), new Services.NavigationService(_navigationStore, CreateCustomerListingViewModel), new Services.NavigationService(_navigationStore, CreateEmployeeListingViewModel), new Services.NavigationService(_navigationStore, CreateAddOrderItemViewModel));
         private BookListingViewModel CreateBookListingViewModel() => BookListingViewModel.LoadViewModel(_bookListStore, new Services.NavigationService(_navigationStore, CreateOrderListingViewModel), new Services.NavigationService(_navigationStore, CreateAddBookViewModel));
         private AuthorListingViewModel CreateAuthorListingViewModel() => AuthorListingViewModel.LoadViewModel(_authorListStore, new Services.NavigationService(_navigationStore, CreateOrderListingViewModel), new Services.NavigationService(_navigationStore, CreateAddAuthorViewModel));
