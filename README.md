@@ -1,1 +1,3 @@
-# BookStoreP4
+# Księgarnia
+
+Projekt na Programowanie IV
