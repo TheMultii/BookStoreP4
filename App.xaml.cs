@@ -63,9 +63,9 @@ namespace BookStoreP4 {
         }
 
         protected override void OnStartup(StartupEventArgs e) {
-            using (BookStoreDBContext dbContext = _bookStoreDBContextFactory.CreateDbContext()) {
-                dbContext.Database.Migrate();
-            }
+            //using (BookStoreDBContext dbContext = _bookStoreDBContextFactory.CreateDbContext()) {
+            //    dbContext.Database.Migrate();
+            //}
 
             _navigationStore.CurrentViewModel = CreateOrderListingViewModel();
 

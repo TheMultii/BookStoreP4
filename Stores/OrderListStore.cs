@@ -31,6 +31,15 @@ namespace BookStoreP4.Stores {
             }
         }
 
+        public async Task DeleteOrder(Order? orderToRemove) {
+            Order? order = await _orderList.DeleteOrder(orderToRemove);
+
+            if (order != null) {
+                int index = _orders.FindIndex(o => o.OrderID == order.OrderID);
+                _orders.RemoveAt(index);
+            }
+        }
+
         public async Task AddOrderItem(OrderItem newOrderItem) {
             await _orderList.AddOrderItem(newOrderItem);
             await Initialize();

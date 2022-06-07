@@ -25,10 +25,9 @@ namespace BookStoreP4.ViewModels {
             }
         }
 
-        public OrderViewModel? SelectedOrderViewModel = null;
-
         public ICommand LoadOrdersCommand { get; }
         public ICommand AddOrderCommand { get; }
+        public ICommand DeleteOrderCommand { get; }
         public ICommand AddBookCommand { get; }
         public ICommand AddOrderItemCommand { get; }
         public ICommand AddCustomerCommand { get; }
@@ -41,6 +40,7 @@ namespace BookStoreP4.ViewModels {
         public OrderListingViewModel(OrderListStore orderListStore, NavigationService addOrderNavigationService, NavigationService addBookNavigationService, NavigationService bookListingNavigationService, NavigationService authorListingNavigationService, NavigationService customerListingNavigationService, NavigationService employeeListingNavigationService, NavigationService addOrderItemNavigationService) {
             _orders = new();
             LoadOrdersCommand = new LoadOrdersCommand(this, orderListStore);
+            DeleteOrderCommand = new DeleteOrderCommand(this, orderListStore);
             AddOrderCommand = new NavigateCommand(addOrderNavigationService);
             AddBookCommand = new NavigateCommand(addBookNavigationService);
             AddOrderItemCommand = new NavigateCommand(addOrderItemNavigationService);

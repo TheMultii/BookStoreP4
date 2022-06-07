@@ -2,7 +2,6 @@
 using BookStoreP4.DTOs;
 using BookStoreP4.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -93,6 +92,22 @@ namespace BookStoreP4.Services.OrdersCreators {
                 order.OrderItems = OrderItemDTOToModel(resOI, order);
                 return order;
             }
+        }
+
+        public async Task<Order?> DeleteOrder(Order? order) {
+            if (order == null) return null;
+            using BookStoreDBContext context = _bookStoreDBContextFactory.CreateDbContext();
+            using var transaction = context.Database.BeginTransaction();
+
+            var res = await context.Orders.Where(x => x.OrderID == order.OrderID).FirstOrDefaultAsync();
+            if (res != null) {
+                context.Orders.Remove(res);
+                await context.SaveChangesAsync();
+                transaction.Commit();
+                return order;
+            }
+
+            return null;
         }
 
         private List<OrderItem> OrderItemDTOToModel(List<OrderItemDTO> resOI, Order order) {

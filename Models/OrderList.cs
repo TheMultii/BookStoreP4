@@ -22,6 +22,10 @@ namespace BookStoreP4.Models {
         public async Task<Order> AddOrder(Order order) {
             return await _orderCreator.CreateOrder(order);
         }
+        public async Task<Order?> DeleteOrder(Order? order) {
+            return await _orderCreator.DeleteOrder(order);
+        }
+
         public async Task AddOrderItem(OrderItem orderItem) {
             await _orderItemCreator.CreateOrderItem(orderItem);
         }

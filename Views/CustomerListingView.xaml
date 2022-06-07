@@ -29,7 +29,7 @@
             </Grid>
 
             <Grid Grid.Row="1">
-                <loadingspinnercontrol:LoadingSpinner Thickness="2" Color="red" Diameter="25" IsLoading="{Binding IsLoading}" />
+                <loadingspinnercontrol:LoadingSpinner Thickness="2" Color="yellow" Diameter="25" IsLoading="{Binding IsLoading}" />
 
                 <ListView ItemsSource="{Binding Customers}" Visibility="{Binding IsLoading,Converter={StaticResource InverseBooleanToVisibilityConverter}}">
                     <ListView.ItemContainerStyle>

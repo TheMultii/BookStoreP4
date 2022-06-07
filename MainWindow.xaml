@@ -60,7 +60,7 @@
 
         <Button Style="{StaticResource TransparentStyle}" Command="{Binding ShowAuthorModalCommand}" Height="auto" VerticalAlignment="Top" Margin="0 10" HorizontalAlignment="Center" Background="Transparent">
             <Border BorderBrush="Yellow" BorderThickness="3 0" Background="#36404D" CornerRadius="2">
-                <TextBlock Foreground="#ffffff" Padding="10 5" Text="KSIĘGARNIA" />
+                <TextBlock Foreground="#ffffff" Padding="10 5" FontSize="14" Text="KSIĘGARNIA" />
             </Border>
         </Button>
 
@@ -97,5 +97,10 @@
 
         <ContentControl Margin="40 60 40 0" Content="{Binding CurrentViewModel}" />
 
+        <Image Width="50" Height="50" Opacity="0.25"  HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 15 15">
+            <Image.Source>
+                <BitmapImage UriSource="./Assets/Circle-Book.ico"/>
+            </Image.Source>
+        </Image>
     </Grid>
 </Window>
